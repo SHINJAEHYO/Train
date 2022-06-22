@@ -86,6 +86,8 @@ def Train_print(): #전체 기차 리스트 출력
         print(i,"(", data[i][0], data[i][1],"->", data[i][3], data[i][4], data[i][5],")")
 
 def Train_myinfor(): #나의 예매 현황 출력 및 예매 취소
+    checknum = 0
+
     if mytrain == []:
         print("예매내역이 없습니다.")
     else:
@@ -95,6 +97,14 @@ def Train_myinfor(): #나의 예매 현황 출력 및 예매 취소
         num = int(input("\n1.예매 취소 / 2. 뒤로 가기 : "))    
         if num == 1:
             delnum = int(input("취소하실 예매내역 번호를 입력하세요. : "))
+
+            while checknum < 1:
+                for k in range(1,len(mytrain)+1): #k는 1부터 mytrain에 저장된 리스트 개수 범위 내의 숫자
+                    if delnum == k:               #delnum이 위 범위 내에 존재하지 않으면 번호 재입력 무한반복
+                        checknum = 1
+                if checknum != 1:
+                    delnum = int(input("번호를 재입력하세요. : "))
+            
             for a in range(1, 21): 
                 if data[a][0] == mytrain[delnum-1][0] and data[a][1] == mytrain[delnum-1][1] and data[a][3] == mytrain[delnum-1][3] and data[a][4] == mytrain[delnum-1][4]:
                     if data[a][5] == '매진': #매진일 시 좌석수 1로 초기화
